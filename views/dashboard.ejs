@@ -1,0 +1,192 @@
+<%- include('_navbar') %>
+    <!-- <link rel="stylesheet" href="/css/dashboard.css"> -->
+    <section class="student_det">
+        <div class="mb-4">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-warning" id="modal-launch" data-bs-toggle="modal"
+                data-bs-target="#addStudent">
+                + Add Student
+            </button>
+        </div>
+
+        <div id="studentTable">
+            <table class="table table-bordered">
+                <thead>
+                  <tr class="text-center">
+                    <th scope="col">Batch</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">College</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">DSA Final Score</th>
+                    <th scope="col">WebDev Final Score</th>
+                    <th scope="col">React Final Score</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% if (students.length == 0){ %>
+                        <tr class="text-center">
+                            <td colspan="8">No Records Found</td>
+                        </tr>
+                    <% } else { %>
+                        <% for (student of students){ %>
+                        <tr class="text-center">
+                            <td><%= student.batch %></td>
+                            <td><%= student.name %></td>
+                            <td><%= student.college %></td>
+                            <td><%= student.status %></td>
+                            <td><%= student.DSAScore %></td>
+                            <td><%= student.WebDScore %></td>
+                            <td><%= student.ReactScore %></td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" id="editModal" data-bs-toggle="modal"
+                                data-bs-target="#editStudent" data-id="<%= student._id %>" data-batch="<%= student.batch %>"
+                                data-name="<%= student.name %>" data-college="<%= student.college %>"
+                                data-status="<%= student.status %>" data-dsascore="<%= student.DSAScore %>"
+                                data-webdscore="<%= student.WebDScore %>" data-reactscore="<%= student.ReactScore %>">Edit</button>
+                                <a href="student/delete-student/<%= student._id %>" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        <% } %>
+                    <% } %>
+                </tbody>
+              </table>
+        </div>
+    </section>
+
+
+    <!-- Add Student Modal -->
+    <div class="modal fade" id="addStudent" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Add New Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="/student/add-student" method="POST">
+                        <!-- Batch Date input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="batch">Batch</label>
+                            <input type="month" id="batch" name="batch" min="2000-01" value="2018-05">
+                        </div>
+
+                        <!-- Student name input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="name">Student Name</label>
+                            <input type="text" id="name" name="name" class="form-control" />
+                        </div>
+
+                        <!-- college input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="college">College</label>
+                            <input type="text" id="college" name="college" class="form-control" />
+                        </div>
+
+                        <!-- status input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="status">Status</label>
+                            <select class="select" id="status" name="status">
+                                <option value="">Select</option>
+                                <option value="Placed">Placed</option>
+                                <option value="Not Placed">Not Placed</option>
+                            </select>
+                        </div>
+
+                        <!-- DSA Score input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="dsaScore">DSA Score</label>
+                            <input type="number" id="dsaScore" name="dsaScore" class="form-control" />
+                        </div>
+
+                        <!-- WebDev Score input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="webDScore">WebDev Sore</label>
+                            <input type="number" id="webDScore" name="webDScore" class="form-control" />
+                        </div>
+
+                        <!-- React Score input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="reactScore">React Score</label>
+                            <input type="number" id="reactScore" name="reactScore" class="form-control" />
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block text-center">Add Student</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <!-- Edit Student Modal -->
+    <div class="modal fade" id="editStudent" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Edit Student Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="" method="POST" id="editForm">
+                        <!-- Batch Date input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_batch">Batch</label>
+                            <input type="month" id="edit_batch" name="edit_batch" min="2000-01" value="2018-05">
+                        </div>
+
+                        <!-- Student name input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_name">Student Name</label>
+                            <input type="text" id="edit_name" name="edit_name" class="form-control" />
+                        </div>
+
+                        <!-- college input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_college">College</label>
+                            <input type="text" id="edit_college" name="edit_college" class="form-control" />
+                        </div>
+
+                        <!-- status input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_status">Status</label>
+                            <select class="select" id="edit_status" name="edit_status">
+                                <option value="">Select</option>
+                                <option value="1">Placed</option>
+                                <option value="2">Not Placed</option>
+                            </select>
+                        </div>
+
+                        <!-- DSA Score input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_dsaScore">DSA Score</label>
+                            <input type="number" id="edit_dsaScore" name="edit_dsaScore" class="form-control" />
+                        </div>
+
+                        <!-- WebDev Score input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_webDScore">WebDev Sore</label>
+                            <input type="number" id="edit_webDScore" name="edit_webDScore" class="form-control" />
+                        </div>
+
+                        <!-- React Score input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_reactScore">React Score</label>
+                            <input type="number" id="edit_reactScore" name="edit_reactScore" class="form-control" />
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block text-center">Update Details</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    
+    <script src="/js/dashboard.js"></script>

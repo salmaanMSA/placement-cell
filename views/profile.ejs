@@ -1,0 +1,28 @@
+<%- include('_navbar') %>
+<div class="profile-content text-center">
+    <h1>
+        <%= title %>
+    </h1>
+    <% if (profileUser.avatar) { %>
+        <img src="<%= profileUser.avatar %>" class="rounded-circle mt-2 mb-4" style="width: 200px; height: 180px;"
+alt="Avatar" />
+    <% } else { %>
+        <img src="/uploads/users/avatars/defaultAvatar.png" class="rounded-circle mt-2 mb-4" style="width: 150px;"
+alt="Avatar" />
+    <% } %>
+        <form action="/users/update/<%= profileUser._id %>" enctype="multipart/form-data" method="POST">
+            <h5 class="mb-4">
+                Name : 
+                <input type="text" name="name" placeholder="Your Name..." value="<%= profileUser.name %>" required>
+            </h5>
+            <h5 class="mb-4">
+                Email : 
+                <input type="email" name="email" placeholder="Your Email..." value="<%= profileUser.email %>" required>
+            </h5>
+            <h5 class="mb-4">
+                ProfilePic :
+                <input type="file" name="avatar" placeholder="ProfilPicture">
+            </h5>
+            <button class="btn btn-md btn-warning mt-2" type="submit">Update Profile</button>
+        </form> 
+</div>
