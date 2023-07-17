@@ -1,0 +1,178 @@
+<%- include('_navbar') %>
+    <link rel="stylesheet" href="/css/company.css">
+    <section class="interview-list">
+        <div class="">
+            <!-- Button trigger modal for add company -->
+            <button type="button" class="btn btn-warning" id="company-modal-launch" data-bs-toggle="modal"
+                data-bs-target="#addCompany">
+                + Add New Company
+            </button>
+        </div>
+
+        <div class="accordion p-4" id="accordionExample">
+            <% if (companies.length==0) { %>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            No Records Found
+                        </button>
+                    </h2>
+                </div>
+                <% } else { %>
+                    <% for (company of companies) { %>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="company_accordian"
+                                    data-bs-target="#<%= company._id %>" aria-expanded="false" data-id="<%= company._id %>"
+                                    aria-controls="collapseTwo">
+
+                                    <strong>DATE OF INTERVIEW : <%= company.doi %> || COMPANY NAME : <%=
+                                                company.companyName %> || JOB ROLE : <%= company.jobRole %></strong>
+
+                                    <a class="delete-company-button p-4" id="company-edit-modal-launch"
+                                        data-bs-toggle="modal" data-bs-target="#editCompany"
+                                        data-id="<%= company._id %>" data-doi="<%= company.doi %>"
+                                        data-companyName="<%= company.companyName %>"
+                                        data-jobRole="<%= company.jobRole %>">
+                                        <i class="fa-sharp fa-solid fa-pen-to-square fa-lg"></i>
+                                    </a>
+
+                                    <a class="delete-company-button p-4"
+                                        href="/company/delete-company/<%= company._id %>">
+                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                    </a>
+                                </button>
+                            </h2>
+                            <div id="<%= company._id %>" class="accordion-collapse collapse"
+                                aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <!-- Button trigger modal for allocate student to interview -->
+                                    <button type="button" class="btn btn-warning mb-4" id="interview-modal-launch"
+                                        data-bs-toggle="modal" data-bs-target="#allocateInterview" data-id="<%= company._id %>">
+                                        + Allocate Student
+                                    </button>
+                                    <div id="interviewTable_<%= company._id %>">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                            <% } %>
+
+        </div>
+    </section>
+
+    <!-- Add Interview Modal -->
+    <div class="modal fade" id="addCompany" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+        <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Add New Company</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="/company/add-company" method="POST">
+                        <!-- Batch Date input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="doi">Interview Date</label>
+                            <input type="date" id="doi" name="doi" value="">
+                        </div>
+
+                        <!-- Company name input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="company_name">Company Name</label>
+                            <input type="text" id="company_name" name="company_name" class="form-control" />
+                        </div>
+
+                        <!-- Job Role input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="job_role">Job Role</label>
+                            <input type="text" id="job_role" name="job_role" class="form-control" />
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block text-center">Add Company</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <!-- Edit Interview Modal -->
+    <div class="modal fade" id="editCompany" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+        <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Edit Company Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="" method="POST" id="company-edit-form">
+                        <!-- Batch Date input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_doi">Interview Date</label>
+                            <input type="date" id="edit_doi" name="edit_doi" value="">
+                        </div>
+
+                        <!-- Company name input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_company_name">Company Name</label>
+                            <input type="text" id="edit_company_name" name="edit_company_name" class="form-control" />
+                        </div>
+
+                        <!-- Job Role input -->
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="edit_job_role">Job Role</label>
+                            <input type="text" id="edit_job_role" name="edit_job_role" class="form-control" />
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block text-center">Update Details</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <!-- Allocate Student For Interview Modal -->
+    <div class="modal fade" id="allocateInterview" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+        <div class="modal-dialog d-flex justify-content-center">
+            <div class="modal-content w-75">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Allocate Student</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form action="/interview/create-interview" method="POST" id="allocate-student-form">
+                        <!-- Company id input hidden field -->
+                        <div class="form-outline mb-4" id="company-id-div">
+                            <input type="hidden" id="company_id" name="company_id" value="">
+                        </div>
+                        <!-- Student Select input -->
+                        <div class="form-outline mb-4" id="select-student-div">
+                            <input type="hidden" id="company_id" name="company_id" value="">
+                            <label class="form-label" for="select_student">Students</label>
+                            <select class="select" id="select_student" name="select_student">
+                                    <!-- Data will be dynamically added using js -->
+                            </select>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block text-center">Allocate Student</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <script src="/js/company.js"></script>

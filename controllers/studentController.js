@@ -1,5 +1,5 @@
 const Student = require('../models/studentDetails');
-
+const Interview = require('../models/InterviewDetails');
 
 module.exports.addStudent = async function(req, res){
     if(req.isAuthenticated()){
@@ -11,7 +11,6 @@ module.exports.addStudent = async function(req, res){
             dsascore = req.body.dsaScore;
             webdscore = req.body.webDScore;
             reactscore = req.body.reactScore;
-            console.log(batch, studname, college, stud_status, dsascore, webdscore, reactscore);
 
             let newStud = Student.create({
                 batch: batch,
@@ -40,6 +39,7 @@ module.exports.removeStudent = async function(req, res){
     if (req.isAuthenticated()){
         let student = await Student.deleteOne({_id: req.params.id});
         if (student){
+            await Interview.deleteMany({student: req.params.id});
             req.flash('success', "Student Deleted Successfully");
             return res.redirect('back');
         }

@@ -1,0 +1,35 @@
+<%- include('_navbar') %>
+    <link rel="stylesheet" href="/css/csvReport.css">
+    <section class="csv-report-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">Csv Report Generate</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-5">
+                    <div class="login-wrap p-4 p-md-5">
+                        <form action="/csv/report-generate" class="login-form" method="POST">
+                            <div class="form-group">
+                                <label class="form-label" for="from_date">From Date</label>
+                                <input type="date" id="from_date" name="from_date" min="2010-01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="to_date">To Date</label>
+                                <input type="date" id="to_date" name="to_date" min="2010-01">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit"
+                                    class="form-control btn btn-primary rounded submit px-3">Generate .csv</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $()
+    </script>
