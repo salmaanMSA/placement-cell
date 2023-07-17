@@ -53,6 +53,7 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+// set flash
 app.use(flash());
 app.use(customMiddleware.setFlash);
 

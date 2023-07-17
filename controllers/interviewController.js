@@ -1,6 +1,7 @@
 const Interview = require('../models/InterviewDetails');
 const Student = require('../models/studentDetails');
 
+// fetch interview details
 module.exports.fetchInterviewDetails = async function(req, res){
     if (req.xhr){
         let interviews = await Interview.find({company: req.params.id})
@@ -15,6 +16,7 @@ module.exports.fetchInterviewDetails = async function(req, res){
     }
 }
 
+// fetch all students
 module.exports.fetchAllStudents = async function(req, res){
     if (req.xhr){
         let students = await Student.find({});
@@ -27,6 +29,7 @@ module.exports.fetchAllStudents = async function(req, res){
     }
 }
 
+// create a new interview or allocate student to the interview
 module.exports.createInterview = async function(req, res){
     if (req.isAuthenticated()){
         try {
@@ -47,6 +50,7 @@ module.exports.createInterview = async function(req, res){
     return res.redirect('users/signIn');
 }
 
+// remove tha allocated student from interview
 module.exports.deleteInterview = async function(req, res) {
     if (req.isAuthenticated()){
         try{
@@ -62,7 +66,7 @@ module.exports.deleteInterview = async function(req, res) {
     return res.redirect('users/signIn');
 }
 
-
+// update the student interview result
 module.exports.updateInterviewResults = async function(req, res){
     if (req.xhr){
         let interviewDet = await Interview.findOne({_id: req.params.id});

@@ -1,6 +1,7 @@
 const Student = require('../models/studentDetails');
 const Interview = require('../models/InterviewDetails');
 
+// create new student
 module.exports.addStudent = async function(req, res){
     if(req.isAuthenticated()){
         try{
@@ -35,6 +36,7 @@ module.exports.addStudent = async function(req, res){
     }
 }
 
+// delete existing student using params id
 module.exports.removeStudent = async function(req, res){
     if (req.isAuthenticated()){
         let student = await Student.deleteOne({_id: req.params.id});
@@ -53,6 +55,7 @@ module.exports.removeStudent = async function(req, res){
     }
 }
 
+// edit the existing student details using params id
 module.exports.editStudent = async function(req, res){
     if (req.isAuthenticated()){
         let student = await Student.findOne({_id: req.params.id});

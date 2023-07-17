@@ -1,4 +1,6 @@
+// transfer the edit data from button to modal
 $(document).on("click", "#editModal", function () {
+    // fetch data from button
     var stud_id = $(this).attr('data-id');
     var batch = $(this).attr('data-batch');
     var name = $(this).attr('data-name');
@@ -8,6 +10,7 @@ $(document).on("click", "#editModal", function () {
     var webdscore = $(this).attr('data-webdscore');
     var reactscore = $(this).attr('data-reactscore');
 
+    // set data to modal input field
     $("#editStudent #editForm").attr('action', '/student/edit-student/' + stud_id);
     $("#editStudent #edit_batch").val(batch);
     $("#edit_name").val(name);

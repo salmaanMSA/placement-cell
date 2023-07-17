@@ -1,6 +1,7 @@
 const Company = require('../models/companyDetails');
 const Interview = require('../models/InterviewDetails');
 
+// List all the company details
 module.exports.companyLists = async function(req, res){
     if (req.isAuthenticated()){
         try{
@@ -16,6 +17,7 @@ module.exports.companyLists = async function(req, res){
     return res.redirect('back');
 }
 
+// create new company details
 module.exports.addCompany = async function(req, res){
     if (req.isAuthenticated()){
         try{
@@ -48,6 +50,7 @@ module.exports.addCompany = async function(req, res){
     }
 }
 
+// edit the existing company details
 module.exports.editCompany = async function(req, res){
     if (req.isAuthenticated()){
         try{
@@ -76,6 +79,7 @@ module.exports.editCompany = async function(req, res){
     }
 }
 
+// delete the company details from the params id
 module.exports.removeCompany = async function(req, res){
     if (req.isAuthenticated()){
         let company = await Company.deleteOne({_id: req.params.id});
