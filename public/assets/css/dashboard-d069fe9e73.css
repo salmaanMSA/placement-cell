@@ -1,0 +1,15 @@
+#modal-launch{
+    float: right;
+    margin-bottom: 1rem;
+    margin-top: -10px;
+    margin-right: 10px;
+}
+
+#status, #edit_status{
+    width: 20rem;
+    height: 2rem;
+}
+
+#studentTable{
+    padding: 1rem;
+}

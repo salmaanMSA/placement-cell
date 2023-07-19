@@ -1,8 +1,11 @@
 // require library and configure the port
 const express = require('express');
+const env = require('./config/environment');
+const morgan = require('morgan'); // for logging
 var cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
+require('./config/view-helper')(app);
 const port = 8000;
 const expressLayout = require('express-ejs-layouts');
 const db = require('./config/mongoose');
@@ -19,7 +22,7 @@ const customMiddleware = require('./config/middleware');
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-app.use(express.static('./assets'));
+app.use(express.static(env.assert_path));
 app.use(expressLayout);
 
 // set path for upload - Avatar
@@ -35,8 +38,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 // using mongo store to store session cookies in db
 app.use(session({
-    name: 'codeial',
-    secret: 'something',
+    name: 'placementCell',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {
