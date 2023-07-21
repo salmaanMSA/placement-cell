@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 const env = require('./environment');
 
 // connect to database
-mongoose.connect(`mongodb://localhost/${env.db}`);
+// mongoose.connect(`mongodb://localhost/${env.db}`);
+
+mongoose.connect("mongodb+srv://salmaan194:Bk5paMbsSI8Falck@cluster0.ocpab4h.mongodb.net/?retryWrites=true&w=majority")
 
 
 // acquire the connection (to check connection is successfull)
