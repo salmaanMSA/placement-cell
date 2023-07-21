@@ -27,12 +27,12 @@ const development = {
 
 const production = {
     name: 'production',
-    assert_path: process.env.PLACEMENT_CELL_ASSET_PATH,
-    session_cookie_key: process.env.PLACEMENT_CELL_SESSION_COOKIE_KEY,
-    db: process.env.PLACEMENT_CELL_DB,
-    google_client_id: process.env.PLACEMENT_CELL_GOOGLE_CLIENT_ID,
-    google_client_secret: process.env.PLACEMENT_CELL_GOOGLE_CLIENT_SECRET,
-    google_callback_url: process.env.PLACEMENT_CELL_GOOGLE_CALLBACK_URL,
+    assert_path: "./assets",
+    session_cookie_key: "tFBrlF6qvHh8FZjJM9N6JZNwRuqmpuuF",
+    db: "tFBrlF6qvHh8FZjJM9N6JZNwRuqmpuuF",
+    google_client_id: "759440711652-stoud97ik1b44jmjpq4hcv6ukmobusrf.apps.googleusercontent.com",
+    google_client_secret: "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",
+    google_callback_url: "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",
     morgan: {
         mode: 'combined',
         options: {stream: accessLogStream}
