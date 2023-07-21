@@ -46,7 +46,7 @@ app.use(session({
         maxAge: (1000 * 60 * 100)
     },
     store: MongoStore.create({
-        mongoUrl: 'mongodb://localhost/placementCellDB',
+        mongoUrl: 'mongodb+srv://salmaan194:Bk5paMbsSI8Falck@cluster0.ocpab4h.mongodb.net/?retryWrites=true&w=majority',
         autoRemove: 'disabled'
     }),
 }));
