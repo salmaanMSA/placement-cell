@@ -1,7 +1,6 @@
 // require library and configure the port
 const express = require('express');
 const env = require('./config/environment');
-const morgan = require('morgan'); // for logging
 var cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
