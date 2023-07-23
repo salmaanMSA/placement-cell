@@ -22,7 +22,7 @@ const customMiddleware = require('./config/middleware');
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-app.use(express.static(env.assert_path));
+app.use(express.static('./assets'));
 app.use(expressLayout);
 
 // set path for upload - Avatar
