@@ -1,6 +1,5 @@
 // require library and configure the port
 const express = require('express');
-const env = require('./config/environment');
 var cookieParser = require('cookie-parser');
 const path = require('path');
 const app = express();
@@ -37,7 +36,7 @@ app.set('views', path.join(__dirname, 'views'));
 // using mongo store to store session cookies in db
 app.use(session({
     name: 'placementCell',
-    secret: env.session_cookie_key,
+    secret: "blahsomething",
     saveUninitialized: false,
     resave: false,
     cookie: {
